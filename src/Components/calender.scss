@@ -12,14 +12,13 @@
 
 .user-details {
   display: flex;
-  margin: 0 auto;
-  flex-wrap: wrap;
   font-size: 1.3rem;
   flex: 1;
   width: 70%;
   line-height: 2rem;
   color: dimgray;
-  //margin: 0 auto;
+  margin:0 auto;
+  flex-wrap: wrap;
 
   &.user-title {
       margin-right: 13%;
@@ -53,6 +52,7 @@
 
 .eye-icon{
   position: relative;
-  top: 7.5px;
-  right: 3px;
+  top: 5px;
+  right: 4.5px;
+  color: rgba(16, 218, 16, 0.979);
 }

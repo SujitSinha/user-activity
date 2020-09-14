@@ -4,7 +4,7 @@ import "../App.css";
 import DatePicker from "react-datepicker";
 import CancelIcon from "@material-ui/icons/Cancel";
 import EventIcon from "@material-ui/icons/Event";
-import RemoveRedEyeIcon from '@material-ui/icons/RemoveRedEye';
+import FiberManualRecordRoundedIcon from '@material-ui/icons/FiberManualRecordRounded';
 
 import "react-datepicker/dist/react-datepicker.css";
 import "./calender.scss";
@@ -25,7 +25,7 @@ function Calendars(props) {
       bottom: "auto",
       marginRight: "-50%",
       transform: "translate(-50%, -50%)",
-      height: "65%",
+      height: "50%",
       width: "45%",
     },
   };
@@ -45,7 +45,7 @@ function Calendars(props) {
   }
 
   function dateChanged() {
-    const filteredDates = props.user.activity_periods.filter((dates) => { return new Date(dates.start_time.substr(0, 11)) > startDate && new Date(dates.start_time.substr(0, 11)) < endDate });
+    const filteredDates = props.user.activity_periods.filter((dates) => { return new Date(dates.start_time.substr(0, 11)) >= startDate && new Date(dates.start_time.substr(0, 11)) <= endDate });
     console.log("filtered:", filteredDates);
     setFrom(filteredDates);
   }
@@ -72,70 +72,64 @@ function Calendars(props) {
             onClick={closeModal}
           />{" "}
         </div>
-        <hr className="hr-line" />
-        <div className="user-details">
-          <div className="user-details user-title">User Name </div>
-          <div className="user-details user-data">{props.user.real_name}</div>
-        </div>
-        <div className="user-details">
-          <div className="user-details user-title">User Id </div>
-          <div className="user-details user-data">{props.user.id}</div>
-        </div>
-        <div className="user-details">
-          <div className="user-details user-title">Activity From</div>
-          <div className="user-details user-data">
-            <DatePicker
-              selected={startDate}
-              onChange={(date) => { setStartDate(date) }}
-              selectsStart
-              startDate={startDate}
-              endDate={endDate}
-            />
-            <EventIcon className="user-details calendar-icon" />
-          </div>
-        </div>
-        <div className="user-details">
-          <div className="user-details user-title">Activity To</div>
-          <div className="user-details user-data">
-            <DatePicker
-              selected={endDate}
-              onChange={(date) => { setEndDate(date); setSelected(true); }}
-              selectsEnd
-              startDate={startDate}
-              endDate={endDate}
-              minDate={startDate}
-            />
-            <EventIcon className="user-details calendar-icon" />
-          </div>
-        </div>
-        {selected &&
+        <div className="flex-show">
+          <hr className="hr-line" />
           <div className="user-details">
-            <div className="user-details user-title">Online Time</div>
-            <div className="user-details user-data">{
-              from.map((sh, index) => {
-                return (
-                  <div key="index">
-                    <RemoveRedEyeIcon className="eye-icon" />{sh.start_time}
-                     To
-                    {sh.end_time}
-                  </div>
-                )
-
-              })}
+            <div className="user-details user-title">User Name </div>
+            <div className="user-details user-data">{props.user.real_name}</div>
+          </div>
+          <div className="user-details">
+            <div className="user-details user-title">User Id </div>
+            <div className="user-details user-data">{props.user.id}</div>
+          </div>
+          <div className="user-details">
+            <div className="user-details user-title">Activity From</div>
+            <div className="user-details user-data">
+              <DatePicker
+                selected={startDate}
+                onChange={(date) => { setStartDate(date) }}
+                selectsStart
+                startDate={startDate}
+                endDate={endDate}
+              />
+              <EventIcon className="user-details calendar-icon" />
             </div>
-          </div>}
-        {!selected && <div className="user-details">
-          <div className="user-details user-title">Online Time</div>
-          <div className="user-details user-data"><div><RemoveRedEyeIcon className="eye-icon" />
-            {props.date} {props.timein} {" "}
-          To {props.timeout}</div></div>
-        </div>
-        }
+          </div>
+          <div className="user-details">
+            <div className="user-details user-title">Activity To</div>
+            <div className="user-details user-data">
+              <DatePicker
+                selected={endDate}
+                onChange={(date) => { setEndDate(date); setSelected(true); }}
+                selectsEnd
+                startDate={startDate}
+                endDate={endDate}
+                minDate={startDate}
+              />
+              <EventIcon className="user-details calendar-icon" />
+            </div>
+          </div>
+          {selected &&
+            <div className="user-details">
+              <div className="user-details user-title">Online Time</div>
+              <div className="user-details user-data">{
+                from.map((sh, index) => {
+                  return (
+                    <div key="index">
+                      <FiberManualRecordRoundedIcon fontSize="small" className="eye-icon" />{sh.start_time}{" "}To{" "}{sh.end_time.substr(13)}
+                    </div>
+                  )
 
-        <div className="user-details">
-          <div className="user-details user-title">Selected Date</div>
-          <div className="user-details user-data">From {startDate.toLocaleString()} To {endDate.toLocaleString()} {" "}
-          to  {props.timeout}</div>
+                })}
+              </div>
+            </div>}
+          {!selected && <div className="user-details">
+            <div className="user-details user-title">Online Time</div>
+            <div className="user-details user-data"><div><FiberManualRecordRoundedIcon fontSize="small" className="eye-icon" />
+              {props.date} {props.timein} {" "}
+          To {props.timeout}</div></div>
+          </div>
+          }
         </div>
       </Modal>
     </div>
