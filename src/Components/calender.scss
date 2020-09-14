@@ -1,0 +1,58 @@
+.modal-header {
+  font-size: 1.8rem;
+  text-align: center;
+  font-weight: 600;
+  color: #559CAD;
+
+  &.close-icon {
+    float: right;
+    cursor: pointer;
+  }
+}
+
+.user-details {
+  display: flex;
+  margin: 0 auto;
+  flex-wrap: wrap;
+  font-size: 1.3rem;
+  flex: 1;
+  width: 70%;
+  line-height: 2rem;
+  color: dimgray;
+  //margin: 0 auto;
+
+  &.user-title {
+      margin-right: 13%;
+  }
+
+  &.calendar-icon {
+    position: relative;
+    top: 8px;
+    right: 40px;
+  }
+}
+
+.open-popup {
+  text-decoration: underline;
+  cursor: pointer;
+  line-height: 2.3rem;
+}
+
+.hr-line {
+  border: 1px dashed #559CAD;
+}
+
+.react-datepicker__input-container > input {
+  border: none;
+  border-bottom: 1px solid dimgray;
+  color: dimgray;
+  &:focus {
+    outline: none;
+  }
+}
+
+.eye-icon{
+  position: relative;
+  top: 7.5px;
+  right: 3px;
+}
